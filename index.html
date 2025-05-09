@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mohamed El Farouk Ounane - Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        /* Custom CSS */
+        :root {
+            --dark-bg: #1a1a1a;
+            --light-text: #f8f9fa;
+            --accent-color: #444;
+        }
+
+        body {
+            color: #444;
+            font-family: "Raleway", Georgia, Palatino, serif;
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 0;
+            background: #fefefe;
+            max-width: 100vw;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 300px;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .sidebar .nav-link {
+            color: var(--light-text);
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link:focus {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Profile section */
+        .profile-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .profile-title {
+            font-size: 1em;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Social media links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: #ccc;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 300px;
+            padding: 20px;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        /* Section headings */
+        .section-heading {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid var(--dark-bg);
+            padding-bottom: 10px;
+        }
+
+        /* Skill bars */
+        .skill-bar {
+            height: 25px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            line-height: 25px;
+            font-size: 0.8em;
+        }
+
+        /* Image hover effects */
+        .portfolio-image {
+            margin-bottom: 15px;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: scale(1);
+            position: relative;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .portfolio-image:hover {
+            opacity: 1;
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        /* Contact form styling */
+        .form-control {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .form-control:focus {
+            border-color: var(--dark-bg);
+            box-shadow: 0 0 0 0.25rem rgba(26, 26, 26, 0.25);
+        }
+
+        .btn-dark {
+            background-color: var(--dark-bg);
+            border-color: var(--dark-bg);
+        }
+
+        .btn-dark:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ccc;
+        }
+
+        footer a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+    <div class="profile-container">
+        <img src="28aaa3e7-dc4f-44f1-85dc-59af187de67d.jpeg" class="profile-photo" alt="Mohamed El Farouk Ounane">
+        <div class="profile-name">Mohamed El Farouk Ounane</div>
+        <div class="profile-title">Mathematician & Algorithm Developer</div>
+    </div>
+
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="#portfolio">PORTFOLIO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#about">ABOUT ME</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#publications">PUBLICATIONS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#contact">CONTACT</a>
+        </li>
+    </ul>
+
+    <!-- Social Media Links -->
+    <div class="social-links">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://instagram.com/yourprofile" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:your.email@example.com" title="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Portfolio section -->
+    <section id="portfolio" class="mb-5">
+        <h4 class="section-heading">PORTFOLIO</h4>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <img src="flower.gif" class="portfolio-image" onclick="openModal(this)" alt="Procedural SDF Flowers">
+                <img src="snake.gif" class="portfolio-image" onclick="openModal(this)" alt="Snake Auto-Play">
+            </div>
+            <div class="col-md-6 mb-4">
+                <img src="heart.gif" class="portfolio-image" onclick="openModal(this)" alt="Heart's Eye">
+            </div>
+        </div>
+    </section>
+
+    <!-- About section -->
+    <section id="about" class="mb-5 p-4 bg-light rounded">
+        <h4 class="section-heading">ABOUT ME</h4>
+        <div class="container">
+            <p>I am a mathematician and algorithm developer with a strong background in dynamical systems, partial differential equations, and numerical methods. My expertise lies in designing and implementing efficient algorithms for solving complex mathematical problems.</p>
+            <p>I have strong experience in numerical methods, computational geometry, and computer graphics. Skilled in bridging mathematical theory with practical implementations, simulations, and creative coding. I am passionate about tackling challenging problems, optimizing algorithms, and delivering innovative solutions in a collaborative environment.</p>
+
+            <h5 class="mt-4 mb-3">Technical Skills</h5>
+            <div class="mb-3">
+                <p>Mathematical Modeling</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 95%">95%</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p>Algorithm Development</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 90%">90%</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p>Numerical Analysis</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%">85%</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p>Programming (C++, Python, MATLAB)</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%">80%</div>
+                </div>
+            </div>
+
+            <button class="btn btn-dark mt-3">
+                <i class="fas fa-download me-2"></i> Download Resume
+            </button>
+        </div>
+    </section>
+
+    <!-- Publications section -->
+    <section id="publications" class="mb-5">
+        <h4 class="section-heading">PUBLICATIONS</h4>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="p-3 border rounded">
+                    <h5>Multiplicity of Solutions for an Elliptic Problem Involving GJMS Operator</h5>
+                    <p class="text-muted">2024, Filomat, Volume 38, Issue 5</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="p-3 border rounded">
+                    <h5>Existence and Uniqueness Results for a Singular Kirchhoff Type Equation on a Closed Manifold</h5>
+                    <p class="text-muted">2024, Differential Geometry and its Applications, Volume 93</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="mt-5">
+        <p>Mohamed El Farouk Ounane &copy; 2024 | Powered by Bootstrap</p>
+    </footer>
+</div>
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Open modal with clicked image
+function openModal(element) {
+    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+    document.getElementById('modalImage').src = element.src;
+    document.getElementById('modalTitle').textContent = element.alt;
+    modal.show();
+}
+
+// Toggle sidebar on small screens
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
