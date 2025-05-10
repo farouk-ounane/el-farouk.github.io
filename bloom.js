@@ -20,7 +20,7 @@ function preload() {
 
 
 function setup(){
-  createCanvas(600, 600, WEBGL);
+  createCanvas(16*35, 16*35, WEBGL);
   
     // Create a color picker and set its position.
   myPicker = createColorPicker('deeppink');
