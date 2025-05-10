@@ -88,7 +88,7 @@ float FlowerSDF(vec3 p) {
             Cut = 0.0;
         }
     
-    return max(spiralDist*0.01, (R - scale * reduction* Cut)*0.07);
+    return max(spiralDist, (R - scale * reduction* Cut)) * 0.01;
 }
 
 float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
