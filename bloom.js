@@ -24,18 +24,18 @@ function setup(){
   
     // Create a color picker and set its position.
   myPicker = createColorPicker('deeppink');
-  myPicker.position(100, 10);
+  myPicker.position(100, 30);
   
   slider_1 = createSlider(0, 300, 300);
-  slider_1.position(200, 10);
+  slider_1.position(200, 30);
   slider_1.size(80);
   
   slider_2 = createSlider(0, 300, 300);
-  slider_2.position(200, 25);
+  slider_2.position(200, 45);
   slider_2.size(80);
   
   slider_3 = createSlider(0, 300, 300);
-  slider_3.position(200, 40);
+  slider_3.position(200, 60);
   slider_3.size(80);
   
   shader(raymarcher);
