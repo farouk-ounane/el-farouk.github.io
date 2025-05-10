@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -348,7 +349,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img id="modalImage" class="img-fluid">
+                <!-- This div will contain either an image or a canvas -->
+                <div id="modal-content-container"></div>
             </div>
         </div>
     </div>
@@ -358,13 +360,63 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+// Dictionary mapping image alts to their corresponding sketch files
+const sketchMap = {
+    "Snake Auto-Play": "sketch.js",
+    "Procedural SDF Flowers": "bloom.js",
+    "Heart's Eye": "heart-sketch.js"
+    // Add more as needed
+};
+
 // Open modal with clicked image
 function openModal(element) {
     const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-    document.getElementById('modalImage').src = element.src;
     document.getElementById('modalTitle').textContent = element.alt;
+    const container = document.getElementById('modal-content-container');
+
+    // Clear previous content
+    container.innerHTML = '';
+
+    // Check if this is a sketch or just an image
+    if (sketchMap[element.alt]) {
+        // Create canvas container with unique ID
+        const canvasId = 'sketch-canvas-' + Date.now();
+        container.innerHTML = `<div id="${canvasId}"></div>`;
+
+        // Load the appropriate sketch
+        loadSketch(sketchMap[element.alt], canvasId);
+    } else {
+        // Display regular image
+        const img = document.createElement('img');
+        img.src = element.src;
+        img.style.maxWidth = '100%';
+        container.appendChild(img);
+    }
+
     modal.show();
 }
+
+// Function to load and execute a sketch
+function loadSketch(sketchFile, containerId) {
+    const script = document.createElement('script');
+    script.src = sketchFile;
+    script.onload = function() {
+        // The sketch will automatically attach to the container
+        new p5(null, containerId);
+    };
+    document.body.appendChild(script);
+}
+
+// Clean up when modal is closed
+document.getElementById('imageModal').addEventListener('hidden.bs.modal', function() {
+    const container = document.getElementById('modal-content-container');
+    container.innerHTML = '';
+
+    // Remove any p5 instances
+    if (typeof p5 !== 'undefined') {
+        p5.prototype.remove();
+    }
+});
 
 // Toggle sidebar on small screens
 function toggleSidebar() {
