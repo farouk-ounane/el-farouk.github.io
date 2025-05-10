@@ -60,7 +60,7 @@ float FlowerSDF(vec3 p) {
     float R = length(p);
     
     if (R == 0.0) return 0.0;
-    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.0015;
+    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.00105;
     
 
     float C = scale * hangDown.x * (1.0/scale) * (1.0/scale) * pow(hangDown.y * (length(p)/scale) - 1.0, 2.3);
@@ -82,13 +82,13 @@ float FlowerSDF(vec3 p) {
     
     float reduction = exp(-5.*theta/thetaReduction);
     
-    if (spiralDist < 0.1) {
-        if (theta < 0.0) {
-            return 0.0015;
-        }
-    }
+
     
-    return max(0.01 * spiralDist, (R - scale * reduction* Cut)*0.01);
+        if (theta < 0.0) {
+            Cut = 0.0;
+        }
+    
+    return max(spiralDist*0.01, (R - scale * reduction* Cut)*0.01);
 }
 
 float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
@@ -131,7 +131,9 @@ float radialVeins(vec3 p, float intensity) {
 void main() {
     vec3 nor = vec3(0.0, 0.0, 1.0);
     
-    vec2 uv = (gl_FragCoord.xy / iResolution) * 2.0 - 1.0;
+    //vec2 uv = (gl_FragCoord.xy / iResolution) * 2.0 - 1.0;
+    vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / min(iResolution.x, iResolution.y);
+
     uv.x *= iResolution.x / iResolution.y;
     
     mat3 rotXMat = rotationMatrix(vec3(1.0, 0.0, 0.0), rotX);
