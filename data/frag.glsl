@@ -83,8 +83,11 @@ float FlowerSDF(vec3 p) {
     float reduction = exp(-5.*theta/thetaReduction);
     
 
+    if (spiralDist < 0.1 && R < scale * reduction* Cut) {
+        return 0.0015;
+    }
     
-        if (theta < 0.0) {
+    if (theta < 0.0) {
             Cut = 0.0;
         }
     
