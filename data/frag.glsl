@@ -134,7 +134,6 @@ void main() {
     //vec2 uv = (gl_FragCoord.xy / iResolution) * 2.0 - 1.0;
     vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / min(iResolution.x, iResolution.y);
 
-    uv.x *= iResolution.x / iResolution.y;
     
     mat3 rotXMat = rotationMatrix(vec3(1.0, 0.0, 0.0), rotX);
     mat3 rotYMat = rotationMatrix(vec3(0.0, 1.0, 0.0), rotY);
