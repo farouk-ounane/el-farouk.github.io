@@ -71,7 +71,7 @@ float FlowerSDF(vec3 p) {
     float phi = acos(-p.y / R);
     float theta = -param.y * 2.302585 * (phi - param.x) /( phi + param.x);
     
-    float Cut = petalCut.x + abs(asin(sin(petalCut.y * theta)) + petalCut.z * sin(petalCut.y * theta)) / petalCut.w;
+    float Cut = petalCut.x + abs(60.0*asin(sin(petalCut.y * theta)) + petalCut.z * sin(petalCut.y * theta)) / petalCut.w;
 
     float r = sin(phi);
     float px2 = R * r * sin(theta);
@@ -88,7 +88,7 @@ float FlowerSDF(vec3 p) {
             Cut = 0.0;
         }
     
-    return max(spiralDist*0.01, (R - scale * reduction* Cut)*0.01);
+    return max(spiralDist*0.01, (R - scale * reduction* Cut)*0.07);
 }
 
 float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
