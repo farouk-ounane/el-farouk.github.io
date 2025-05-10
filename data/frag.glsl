@@ -71,7 +71,7 @@ float FlowerSDF(vec3 p) {
     float phi = acos(-p.y / R);
     float theta = -param.y * 2.302585 * (phi - param.x) /( phi + param.x);
     
-    float Cut = petalCut.x + abs(60.0*asin(sin(petalCut.y * theta)) + petalCut.z * sin(petalCut.y * theta)) / petalCut.w;
+    float Cut = petalCut.x + abs(asin(sin(petalCut.y * theta)) + petalCut.z * sin(petalCut.y * theta)) / petalCut.w;
 
     float r = sin(phi);
     float px2 = R * r * sin(theta);
