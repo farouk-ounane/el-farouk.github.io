@@ -410,6 +410,7 @@ function openModal(element) {
     if (p5_inst) {
         p5_inst.remove();
         p5_inst = null;
+        document.body.removeChild(current_sript);
         current_sript = null;
     }
     container.innerHTML = '';
@@ -418,10 +419,9 @@ function openModal(element) {
 
     // Check if this is a sketch or just an image
     if (sketchMap[element.alt]) {
-        current_script = sketchMap[element.alt];
 
         // Load the appropriate sketch
-        loadSketch(current_script, 'modal-content-container');
+        loadSketch(sketchMap[element.alt], 'modal-content-container');
     } else {
         // Display regular image
         const img = document.createElement('img');
@@ -435,13 +435,13 @@ function openModal(element) {
 
 // Function to load and execute a sketch
 function loadSketch(sketchFile, containerId) {
-    const script = document.createElement('script');
-    script.src = sketchFile;
-    script.onload = function() {
+    current_script = document.createElement('script');
+    current_script.src = sketchFile;
+    current_script.onload = function() {
         // The sketch will automatically attach to the container
         p5_inst = new p5(null, containerId);
     };
-    document.body.appendChild(script);
+    document.body.appendChild(current_script);
 }
 
 // Clean up when modal is closed
@@ -452,6 +452,7 @@ document.getElementById('imageModal').addEventListener('hidden.bs.modal', functi
     if (p5_inst) {
         p5_inst.remove();
         p5_inst = null;
+        document.body.removeChild(current_sript);
         current_sript = null;
     }
     container.innerHTML = '';
