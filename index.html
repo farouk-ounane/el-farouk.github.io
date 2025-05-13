@@ -407,7 +407,12 @@ function openModal(element) {
 
     // Clear previous content
     container.innerHTML = '';
-
+    // Remove any p5 instances
+    if (typeof p5 !== 'undefined') {
+        p5_inst.remove();
+    }
+    p5_inst = null;
+    
 
     // Check if this is a sketch or just an image
     if (sketchMap[element.alt]) {
@@ -446,6 +451,7 @@ document.getElementById('imageModal').addEventListener('hidden.bs.modal', functi
     if (typeof p5 !== 'undefined') {
         p5_inst.remove();
     }
+    p5_inst = null;
 });
 
 // Toggle sidebar on small screens
