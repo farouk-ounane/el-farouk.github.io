@@ -2,7 +2,7 @@ let raymarcher;
 let rotX = 0;
 let rotY = 0;
 let prevMouseX, prevMouseY;
-let isDragging = false;
+var isDragging = false;
 
 let slider_1;
 let slider_2;
