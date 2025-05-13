@@ -398,6 +398,7 @@ const sketchMap = {
 };
 
 let p5_inst = null;
+let current_script = null;
 
 // Open modal with clicked image
 function openModal(element) {
@@ -408,19 +409,23 @@ function openModal(element) {
     // Clear previous content
     container.innerHTML = '';
     // Remove any p5 instances
-    if (p5_inst != null) {
+    if (p5_inst) {
         p5_inst.remove();
         p5_inst = null;
+    }
+    if (current_script) {
+        document.body.removeChild(current_script);
+        current_sript = null;
     }
     
     
 
     // Check if this is a sketch or just an image
     if (sketchMap[element.alt]) {
-        // Create canvas container with unique ID
+        current_script = sketchMap[element.alt];
 
         // Load the appropriate sketch
-        loadSketch(sketchMap[element.alt], 'modal-content-container');
+        loadSketch(current_script, 'modal-content-container');
     } else {
         // Display regular image
         const img = document.createElement('img');
@@ -449,11 +454,15 @@ document.getElementById('imageModal').addEventListener('hidden.bs.modal', functi
     container.innerHTML = '';
 
     // Remove any p5 instances
-    if (p5_inst != null) {
+    if (p5_inst) {
         p5_inst.remove();
         p5_inst = null;
     }
-    p5_inst = null;
+
+    if (current_script) {
+        document.body.removeChild(current_script);
+        current_sript = null;
+    }
 });
 
 // Toggle sidebar on small screens
