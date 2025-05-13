@@ -12,7 +12,7 @@ let pupilPos = [0, 0];
 let blinking = false;
 let blinking_timer = 0.0;
 
-let isDragging = false;
+var isDragging = false;
 let previousMouseX, previousMouseY;
 let rotationX = 0;
 let rotationY = 0;
