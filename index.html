@@ -218,7 +218,36 @@
                 width: 100px;
                 height: 100px;
             }
+            .modal-dialog {
+                margin: 0;
+                max-width: 100%;
+                height: 100%;
+            }
+
+            .modal-content {
+                height: 100%;
+                border-radius: 0;
+            }
+
+            #modal-content-container canvas {
+                transform: scale(0.6);
+            }
         }
+
+    @media (max-width: 768px) {
+        #modal-content-container {
+            overflow: auto;
+            max-height: 60vh;
+        }
+
+        #modal-content-container canvas {
+            max-width: 100%;
+            height: auto !important;
+            transform-origin: top left;
+            transform: scale(0.7);
+        }
+    }
+
     </style>
 </head>
 <body>
@@ -368,6 +397,8 @@ const sketchMap = {
     // Add more as needed
 };
 
+let p5_inst = null;
+
 // Open modal with clicked image
 function openModal(element) {
     const modal = new bootstrap.Modal(document.getElementById('imageModal'));
@@ -377,14 +408,13 @@ function openModal(element) {
     // Clear previous content
     container.innerHTML = '';
 
+
     // Check if this is a sketch or just an image
     if (sketchMap[element.alt]) {
         // Create canvas container with unique ID
-        const canvasId = 'sketch-canvas-' + Date.now();
-        container.innerHTML = `<div id="${canvasId}"></div>`;
 
         // Load the appropriate sketch
-        loadSketch(sketchMap[element.alt], canvasId);
+        loadSketch(sketchMap[element.alt], 'modal-content-container');
     } else {
         // Display regular image
         const img = document.createElement('img');
@@ -402,7 +432,7 @@ function loadSketch(sketchFile, containerId) {
     script.src = sketchFile;
     script.onload = function() {
         // The sketch will automatically attach to the container
-        new p5(null, containerId);
+        p5_inst = new p5(null, containerId);
     };
     document.body.appendChild(script);
 }
@@ -414,7 +444,7 @@ document.getElementById('imageModal').addEventListener('hidden.bs.modal', functi
 
     // Remove any p5 instances
     if (typeof p5 !== 'undefined') {
-        p5.prototype.remove();
+        p5_inst.remove();
     }
 });
 
