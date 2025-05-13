@@ -406,17 +406,13 @@ function openModal(element) {
     document.getElementById('modalTitle').textContent = element.alt;
     const container = document.getElementById('modal-content-container');
 
-    // Clear previous content
-    container.innerHTML = '';
     // Remove any p5 instances
     if (p5_inst) {
         p5_inst.remove();
         p5_inst = null;
-    }
-    if (current_script) {
-        document.body.removeChild(current_script);
         current_sript = null;
     }
+    container.innerHTML = '';
     
     
 
@@ -451,18 +447,15 @@ function loadSketch(sketchFile, containerId) {
 // Clean up when modal is closed
 document.getElementById('imageModal').addEventListener('hidden.bs.modal', function() {
     const container = document.getElementById('modal-content-container');
-    container.innerHTML = '';
-
+    
     // Remove any p5 instances
     if (p5_inst) {
         p5_inst.remove();
         p5_inst = null;
-    }
-
-    if (current_script) {
-        document.body.removeChild(current_script);
         current_sript = null;
     }
+    container.innerHTML = '';
+
 });
 
 // Toggle sidebar on small screens
