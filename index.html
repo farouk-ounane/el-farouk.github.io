@@ -408,10 +408,11 @@ function openModal(element) {
     // Clear previous content
     container.innerHTML = '';
     // Remove any p5 instances
-    if (typeof p5 !== 'undefined') {
+    if (p5_inst != null) {
         p5_inst.remove();
+        p5_inst = null;
     }
-    p5_inst = null;
+    
     
 
     // Check if this is a sketch or just an image
@@ -448,8 +449,9 @@ document.getElementById('imageModal').addEventListener('hidden.bs.modal', functi
     container.innerHTML = '';
 
     // Remove any p5 instances
-    if (typeof p5 !== 'undefined') {
+    if (p5_inst != null) {
         p5_inst.remove();
+        p5_inst = null;
     }
     p5_inst = null;
 });
