@@ -1,14 +1,14 @@
-let raymarcher;
-let rotX = 0;
-let rotY = 0;
-let prevMouseX, prevMouseY;
+var raymarcher;
+var rotX = 0;
+var rotY = 0;
+var prevMouseX, prevMouseY;
 var isDragging = false;
 
-let slider_1;
-let slider_2;
-let slider_3;
+var slider_1;
+var slider_2;
+var slider_3;
 
-let myPicker;
+var myPicker;
 
 
 function preload() {
@@ -104,11 +104,5 @@ function mouseDragged() {
     rotX += deltaY * 0.01;
     prevMouseX = mouseX;
     prevMouseY = mouseY;
-  }
-}
-
-function keyPressed() {
-  if (key === 's') {
-    saveGif('mySketch', 5);
   }
 }
