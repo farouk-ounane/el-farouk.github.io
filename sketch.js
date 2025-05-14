@@ -1,8 +1,8 @@
-let xFood, yFood;
-let score = 0;
-let snake;
-let gameOver = false;
-let canvasContext;
+var xFood, yFood;
+var score = 0;
+var snake;
+var gameOver = false;
+var canvasContext;
 
 function setup() {
   createCanvas(35*16, 35*16);
@@ -196,11 +196,5 @@ class Snake {
       return this.nextSegment.isOnFood(x, y);
     }
     return false;
-  }
-}
-
-function keyPressed() {
-  if (key === 's') {
-    saveGif('mySketch', 5);
   }
 }
