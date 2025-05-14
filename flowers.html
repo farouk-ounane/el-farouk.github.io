@@ -267,13 +267,13 @@
 
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" href="#portfolio">PORTFOLIO</a>
+            <a class="nav-link active" href="./index.html#portfolio">PORTFOLIO</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#about">ABOUT ME</a>
+            <a class="nav-link" href="./index.html#about">ABOUT ME</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#publications">PUBLICATIONS</a>
+            <a class="nav-link" href="./index.html#publications">PUBLICATIONS</a>
         </li>
     </ul>
 
@@ -296,84 +296,15 @@
 
 <!-- Main Content -->
 <div class="main-content">
-    <!-- Portfolio section -->
-    <section id="portfolio" class="mb-5">
-        <h4 class="section-heading">PORTFOLIO</h4>
-        <!-- In your portfolio section, replace the images with links -->
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <a href="flowers.html" class="portfolio-link">
-                    <img src="flower.gif" class="portfolio-image" alt="Procedural SDF Flowers">
-                </a>
-                <a href="snake.html" class="portfolio-link">
-                    <img src="snake.gif" class="portfolio-image" alt="Snake Auto-Play">
-                </a>
-            </div>
-            <div class="col-md-6 mb-4">
-                <a href="heart.html" class="portfolio-link">
-                    <img src="heart.gif" class="portfolio-image" alt="Heart's Eye">
-                </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- About section -->
-    <section id="about" class="mb-5 p-4 bg-light rounded">
-        <h4 class="section-heading">ABOUT ME</h4>
-        <div class="container">
-            <p>I am a mathematician and algorithm developer with a strong background in dynamical systems, partial differential equations, and numerical methods. My expertise lies in designing and implementing efficient algorithms for solving complex mathematical problems.</p>
-            <p>I have strong experience in numerical methods, computational geometry, and computer graphics. Skilled in bridging mathematical theory with practical implementations, simulations, and creative coding. I am passionate about tackling challenging problems, optimizing algorithms, and delivering innovative solutions in a collaborative environment.</p>
 
-            <h5 class="mt-4 mb-3">Technical Skills</h5>
-            <div class="mb-3">
-                <p>Mathematical Modeling</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 95%">95%</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <p>Algorithm Development</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 90%">90%</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <p>Numerical Analysis</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 85%">85%</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <p>Programming (C++, Python, MATLAB)</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 80%">80%</div>
-                </div>
-            </div>
 
-            <button class="btn btn-dark mt-3">
-                <i class="fas fa-download me-2"></i> Download Resume
-            </button>
-        </div>
-    </section>
+  <section  class="mb-5 p-4 bg-light rounded">
+      <h4 class="section-heading">Procedural Ray-Marched Flower</h4>
+      <div id="sketch"></div>
+  </section>
 
-    <!-- Publications section -->
-    <section id="publications" class="mb-5">
-        <h4 class="section-heading">PUBLICATIONS</h4>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="p-3 border rounded">
-                    <h5>Multiplicity of Solutions for an Elliptic Problem Involving GJMS Operator</h5>
-                    <p class="text-muted">2024, Filomat, Volume 38, Issue 5</p>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="p-3 border rounded">
-                    <h5>Existence and Uniqueness Results for a Singular Kirchhoff Type Equation on a Closed Manifold</h5>
-                    <p class="text-muted">2024, Differential Geometry and its Applications, Volume 93</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
     <footer class="mt-5">
@@ -384,6 +315,7 @@
 
 <!-- Bootstrap JS Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="bloom.js"></script>
 
 <script>
 
@@ -393,6 +325,8 @@ function toggleSidebar() {
     sidebar.classList.toggle('active');
 }
 </script>
+
+
 
 </body>
 </html>

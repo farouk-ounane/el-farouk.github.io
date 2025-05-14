@@ -1,70 +1,71 @@
-var heart_shader;
-var heart;
+let heart_shader;
+let heart;
 
-var shader_enable = true;
+let shader_enable = true;
 
-var eyeOpen = true;
-var eyeLidProgress = 1.0;
-var eyeTransitionSpeed = 0.05;
+let eyeOpen = true;
+let eyeLidProgress = 1.0;
+let eyeTransitionSpeed = 0.05;
 
-var pupilPos = [0, 0];
+let pupilPos = [0, 0];
 
-var blinking = false;
-var blinking_timer = 0.0;
+let blinking = false;
+let blinking_timer = 0.0;
 
-var isDragging = false;
-var previousMouseX, previousMouseY;
-var rotationX = 0;
-var rotationY = 0;
-var originalModelViewMatrix;
-var originalProjectionMatrix;
-var return_to_position = false;
+let isDragging = false;
+let previousMouseX, previousMouseY;
+let rotationX = 0;
+let rotationY = 0;
+let originalModelViewMatrix;
+let originalProjectionMatrix;
+let return_to_position = false;
 
-var slider_x;
-var slider_y;
+let slider_x;
+let slider_y;
 
-var eye_button;
-var shader_button;
+let eye_button;
+let shader_button;
 
 function preload() {
   // "human heart" (https://skfb.ly/EnQR) by sammite is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
   heart = loadModel("./data/heart.obj");
-  
+
   // This is my shader (Mohamed El Farouk Ounane)
   heart_shader = loadShader("./data/shader.vert", "./data/shader.frag");
 }
-  
+
 function setup() {
-  createCanvas(560, 560, WEBGL);
-  
+  const cnv = createCanvas(560, 560, WEBGL);
+  cnv.parent('sketch');
+
   slider_x = createSlider(300, 1000, 1000);
   slider_x.position(10, 10);
   slider_x.size(80);
-  
+
   slider_y = createSlider(300, 1000, 1000);
   slider_y.position(10, 20);
   slider_y.size(80);
-  
+
   eye_button = createButton('Close');
   eye_button.position(15, 40);
   eye_button.mouseClicked(eye);
-  
+
   shader_button = createButton('Remove Shader Magic');
   shader_button.position(15, 65);
   shader_button.mouseClicked(shader_enabling);
-  
+
   noStroke();
 }
 
 function draw() {
   background(0);
-  
+
   let x_light = slider_x.value();
   let y_light = slider_y.value();
-  
+
   pupilPos[0] = ((constrain(mouseX, -width/4.0, 5*width/4.0) / float(width) - 0.5) * 0.7);
   pupilPos[1] = -((constrain(mouseY, -height/4.0, 5.0*height/4) / float(height) - 0.5) * 1.0);
-  
+
   if (eyeOpen && !blinking) {
     eyeLidProgress = min(eyeLidProgress + eyeTransitionSpeed, 1.0);
   } else {
@@ -73,17 +74,17 @@ function draw() {
 
   rotateZ(PI);
   rotateY(-1);
-  
+
   originalModelViewMatrix = this._renderer.uMVMatrix.copy();
   originalProjectionMatrix = this._renderer.uPMatrix.copy();
 
   rotateY(rotationX);
-  
+
   if (abs(rotationX)> 0.1) {
     if (return_to_position)
     {
       rotationX -= 0.1 * rotationX/abs(rotationX);
-      
+
       if (abs(rotationX) <= 0.1)
       {
            return_to_position = false;
@@ -96,12 +97,12 @@ function draw() {
     eyeOpen = false;
     }
   }
-  
+
   let dirY = (x_light / float(height) - 0.5) * 2;
   let dirX = (y_light / float(width) - 0.5) * 2;
-  
+
   directionalLight(204, 204, 204, -dirX, -dirY, -1);
-  
+
   if (shader_enable) {
 
     shader(heart_shader);
@@ -113,24 +114,24 @@ function draw() {
     heart_shader.setUniform("eyeOpen", eyeOpen && !blinking);
     heart_shader.setUniform("eyeLidProgress", eyeLidProgress);
   }
-  
+
   if (random(1, 100) < 2 && blinking_timer <= 0.0) {
     blinking_timer = 1.0;
     blinking = true;
   }
-  
+
   blinking_timer -= 0.1;
-  
+
   if (blinking_timer < 0.0) {
     blinking = false;
   }
 
   model(heart);
- 
+
 }
 
 function eye() {
-  
+
   if (abs(rotationX)> 0.1) {
     return_to_position = true;
   }
@@ -161,13 +162,19 @@ function mouseReleased() {
 
 function mouseDragged() {
   if (!isDragging) return;
-  
+
   var deltaX = mouseX - previousMouseX;
   var deltaY = mouseY - previousMouseY;
-  
+
   rotationX += deltaX * 0.01;
-  rotationY += deltaY * 0.01; 
-  
+  rotationY += deltaY * 0.01;
+
   previousMouseX = mouseX;
   previousMouseY = mouseY;
+}
+
+function keyPressed() {
+  if (key === 's') {
+    saveGif('mySketch', 10);
+  }
 }

@@ -1,14 +1,14 @@
-var raymarcher;
-var rotX = 0;
-var rotY = 0;
-var prevMouseX, prevMouseY;
-var isDragging = false;
+let raymarcher;
+let rotX = 0;
+let rotY = 0;
+let prevMouseX, prevMouseY;
+let isDragging = false;
 
-var slider_1;
-var slider_2;
-var slider_3;
+let slider_1;
+let slider_2;
+let slider_3;
 
-var myPicker;
+let myPicker;
 
 
 function preload() {
@@ -20,42 +20,43 @@ function preload() {
 
 
 function setup(){
-  createCanvas(16*35, 16*35, WEBGL);
-  
+  const cnv = createCanvas(16*35, 16*35, WEBGL);
+  cnv.parent('sketch');
+
     // Create a color picker and set its position.
   myPicker = createColorPicker('deeppink');
   myPicker.position(100, 30);
-  
+
   slider_1 = createSlider(0, 300, 300);
   slider_1.position(200, 30);
   slider_1.size(80);
-  
+
   slider_2 = createSlider(0, 300, 300);
   slider_2.position(200, 45);
   slider_2.size(80);
-  
+
   slider_3 = createSlider(0, 300, 300);
   slider_3.position(200, 60);
   slider_3.size(80);
-  
+
   shader(raymarcher);
   noStroke();
 }
 
 function draw() {
-  
+
   let c = myPicker.color();
 
   let lambda_1 = float(slider_1.value());
   let lambda_2 = float(slider_2.value());
   let lambda_3 = float(slider_3.value());
-  
+
   let total = lambda_1+lambda_2+lambda_3;
-  
+
   lambda_1 /= total;
   lambda_2 /= total;
   lambda_3 /= total;
-  
+
   let A = lambda_1 * (3.14159/2.5) + lambda_2 * (3.14159/2.5) + lambda_3 * (3.14159/1.75);
   let B = lambda_1 * (16.0*3.14159) + lambda_2 * (6.5*3.14159) + lambda_3 * (11.0*3.14159);
   let petalCutA = lambda_1 * 2.75 + lambda_2 * 2.25 + lambda_3 * 4.75;
@@ -65,19 +66,19 @@ function draw() {
   let hangDownA = lambda_1 * 1.4 + lambda_2 * 2.3 + lambda_3 * 2.3;
   let hangDownB = lambda_1 * 1.0 + lambda_2 * 0.8 + lambda_3 * 0.9;
   let thetaReduction = (lambda_1 * 6000.0 + lambda_2 * 10000.0 + lambda_3 * 20000.0)*3.14159/180.0;
-  
+
   let r = red(c) / 255.0;
   let g = green(c) / 255.0;
   let b = blue(c) / 255.0;
-  
+
   raymarcher.setUniform('bColor', [r, g, b]);
-  
-  
+
+
   raymarcher.setUniform('iResolution', [width, height]);
   raymarcher.setUniform('iTime', 0.0);// millis() / 1000.0);
   raymarcher.setUniform('rotX', min(rotX-3.14/2.0, 0));
   raymarcher.setUniform('rotY', rotY + millis() / 1000.0);
-  
+
   raymarcher.setUniform('param', [A, B]);
   raymarcher.setUniform('petalCut', [basePetalCut, petalCutA, petalCutB, petalCutC]);
   raymarcher.setUniform('hangDown', [hangDownA, hangDownB]);
@@ -104,5 +105,11 @@ function mouseDragged() {
     rotX += deltaY * 0.01;
     prevMouseX = mouseX;
     prevMouseY = mouseY;
+  }
+}
+
+function keyPressed() {
+  if (key === 's') {
+    saveGif('mySketch', 5);
   }
 }
