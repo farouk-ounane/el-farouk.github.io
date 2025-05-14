@@ -1,30 +1,30 @@
-let heart_shader;
-let heart;
+var heart_shader;
+var heart;
 
-let shader_enable = true;
+var shader_enable = true;
 
-let eyeOpen = true;
-let eyeLidProgress = 1.0;
-let eyeTransitionSpeed = 0.05;
+var eyeOpen = true;
+var eyeLidProgress = 1.0;
+var eyeTransitionSpeed = 0.05;
 
-let pupilPos = [0, 0];
+var pupilPos = [0, 0];
 
-let blinking = false;
-let blinking_timer = 0.0;
+var blinking = false;
+var blinking_timer = 0.0;
 
 var isDragging = false;
-let previousMouseX, previousMouseY;
-let rotationX = 0;
-let rotationY = 0;
-let originalModelViewMatrix;
-let originalProjectionMatrix;
-let return_to_position = false;
+var previousMouseX, previousMouseY;
+var rotationX = 0;
+var rotationY = 0;
+var originalModelViewMatrix;
+var originalProjectionMatrix;
+var return_to_position = false;
 
-let slider_x;
-let slider_y;
+var slider_x;
+var slider_y;
 
-let eye_button;
-let shader_button;
+var eye_button;
+var shader_button;
 
 function preload() {
   // "human heart" (https://skfb.ly/EnQR) by sammite is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
