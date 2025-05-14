@@ -171,9 +171,3 @@ function mouseDragged() {
   previousMouseX = mouseX;
   previousMouseY = mouseY;
 }
-
-function keyPressed() {
-  if (key === 's') {
-    saveGif('mySketch', 10);
-  }
-}
