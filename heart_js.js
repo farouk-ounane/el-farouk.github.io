@@ -35,26 +35,27 @@ function preload() {
 }
 
 function setup() {
+
   const cnv = createCanvas(560, 560, WEBGL);
   cnv.parent('sketch');
 
   slider_x = createSlider(300, 1000, 1000);
-  slider_x.parent('controls');
+  slider_x.parent('sketch');
   slider_x.position(10, 10);
   slider_x.size(80);
 
   slider_y = createSlider(300, 1000, 1000);
-  slider_y.parent('controls');
+  slider_y.parent('sketch');
   slider_y.position(10, 20);
   slider_y.size(80);
 
   eye_button = createButton('Close');
-  eye_button.parent('controls');
+  eye_button.parent('sketch');
   eye_button.position(15, 40);
   eye_button.mouseClicked(eye);
 
   shader_button = createButton('Remove Shader Magic');
-  shader_button.parent('controls');
+  shader_button.parent('sketch');
   shader_button.position(15, 65);
   shader_button.mouseClicked(shader_enabling);
 
@@ -177,8 +178,3 @@ function mouseDragged() {
   previousMouseY = mouseY;
 }
 
-function keyPressed() {
-  if (key === 's') {
-    saveGif('mySketch', 10);
-  }
-}
