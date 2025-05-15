@@ -20,11 +20,10 @@ let originalModelViewMatrix;
 let originalProjectionMatrix;
 let return_to_position = false;
 
-let slider_x;
-let slider_y;
+let x_light;
+let y_light;
 
 let eye_button;
-let shader_button;
 
 function preload() {
   // "human heart" (https://skfb.ly/EnQR) by sammite is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
@@ -35,38 +34,14 @@ function preload() {
 }
 
 function setup() {
-
   const cnv = createCanvas(560, 560, WEBGL);
   cnv.parent('sketch');
-
-  slider_x = createSlider(300, 1000, 1000);
-  slider_x.parent('sketch');
-  slider_x.position(10, 10);
-  slider_x.size(80);
-
-  slider_y = createSlider(300, 1000, 1000);
-  slider_y.parent('sketch');
-  slider_y.position(10, 20);
-  slider_y.size(80);
-
-  eye_button = createButton('Close');
-  eye_button.parent('sketch');
-  eye_button.position(15, 40);
-  eye_button.mouseClicked(eye);
-
-  shader_button = createButton('Remove Shader Magic');
-  shader_button.parent('sketch');
-  shader_button.position(15, 65);
-  shader_button.mouseClicked(shader_enabling);
 
   noStroke();
 }
 
 function draw() {
   background(0);
-
-  let x_light = slider_x.value();
-  let y_light = slider_y.value();
 
   pupilPos[0] = ((constrain(mouseX, -width/4.0, 5*width/4.0) / float(width) - 0.5) * 0.7);
   pupilPos[1] = -((constrain(mouseY, -height/4.0, 5.0*height/4) / float(height) - 0.5) * 1.0);
@@ -85,22 +60,25 @@ function draw() {
 
   rotateY(rotationX);
 
-  if (abs(rotationX)> 0.1) {
-    if (return_to_position)
-    {
-      rotationX -= 0.1 * rotationX/abs(rotationX);
+  if (abs(rotationX) > 0.1) {
+      if (return_to_position) {
+          rotationX -= 0.1 * rotationX/abs(rotationX);
 
-      if (abs(rotationX) <= 0.1)
-      {
-           return_to_position = false;
-           eyeOpen = true;
-           eye_button.html("Close");
+          if (abs(rotationX) <= 0.1) {
+              return_to_position = false;
+              eyeOpen = true;
+              // Update HTML button instead of p5.js button
+              if (document.getElementById('eyeButton')) {
+                  document.getElementById('eyeButton').textContent = "Close Eye";
+              }
+          }
+      } else {
+          // Update HTML button instead of p5.js button
+          if (document.getElementById('eyeButton')) {
+              document.getElementById('eyeButton').textContent = "Open Eye";
+          }
+          eyeOpen = false;
       }
-    }
-    else {
-    eye_button.html("Open up!");
-    eyeOpen = false;
-    }
   }
 
   let dirY = (x_light / float(height) - 0.5) * 2;
@@ -143,13 +121,11 @@ function eye() {
   else
   {
   eyeOpen = !eyeOpen;
-  eye_button.html(eyeOpen ? "Close" : "Open up!");
   }
 }
 
 function shader_enabling() {
   shader_enable = !shader_enable;
-  shader_button.html(shader_enable ? "Remove Shader Magic" : "Add Shader Magic!");
   resetShader();
 }
 
@@ -178,3 +154,25 @@ function mouseDragged() {
   previousMouseY = mouseY;
 }
 
+// Add these functions to connect with HTML controls
+function setLightX(val) {
+    x_light = val;
+}
+
+function setLightY(val) {
+    y_light = val;
+}
+
+function toggleEye() {
+    eye();
+}
+
+function toggleShader() {
+    shader_enabling();
+}
+
+// Make functions available to HTML
+window.setLightX = setLightX;
+window.setLightY = setLightY;
+window.toggleEye = toggleEye;
+window.toggleShader = toggleShader;
