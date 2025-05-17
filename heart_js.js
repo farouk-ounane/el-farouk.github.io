@@ -20,8 +20,8 @@ let originalModelViewMatrix;
 let originalProjectionMatrix;
 let return_to_position = false;
 
-let x_light = 1000;
-let y_light = 1000;
+let x_light;
+let y_light;
 
 let eye_button;
 
@@ -37,6 +37,8 @@ function setup() {
   const cnv = createCanvas(560, 560, WEBGL);
   cnv.parent('sketch');
 
+  x_light = 1000;
+  y_light = 1000;
   noStroke();
 }
 
