@@ -20,8 +20,8 @@ let originalModelViewMatrix;
 let originalProjectionMatrix;
 let return_to_position = false;
 
-let x_light;
-let y_light;
+let x_light = 1000;
+let y_light = 1000;
 
 let eye_button;
 
