@@ -109,10 +109,10 @@ function setCamelia(val) {
 }
 
 function setLotus(val) {
-    Lotus_value = val;
+    lotus_value = val;
 }
 function setDahlia(val) {
-    Dahlia_value = val;
+    dahlia_value = val;
 }
 
 function setFlowerColor(hexColor) {
