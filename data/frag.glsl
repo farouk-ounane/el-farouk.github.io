@@ -8,6 +8,10 @@ uniform float iTime;
 uniform float rotX;
 uniform float rotY;
 
+uniform float thickness;
+uniform float MaxDepth;
+uniform float field;
+
 uniform float thetaReduction;
 uniform vec2 param;
 uniform vec4 petalCut;
@@ -60,7 +64,7 @@ float FlowerSDF(vec3 p) {
     float R = length(p);
     
     if (R == 0.0) return 0.0;
-    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.0015;
+    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.001*(1.0+thickness) +0.0005;
     
 
     float C = scale * hangDown.x * (1.0/scale) * (1.0/scale) * pow(hangDown.y * (length(p)/scale) - 1.0, 2.3);
@@ -68,7 +72,7 @@ float FlowerSDF(vec3 p) {
     
     R = length(p);
 
-    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.00105;
+    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.001*(1.0+thickness) + 0.0005;
 
     
     float phi = acos(-p.y / R);
@@ -97,12 +101,12 @@ float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
     float depth = 0.0;
     for (int i = 0; i < 1000; i++) {
         vec3 p = ro + rd * depth;
-        p.xz = p.xz - 3.5*floor(p.xz/3.5+0.5);
+        p.xz = p.xz - field*3.5*floor(p.xz/3.5+0.5);
         float d = FlowerSDF(p);
        
-        if (d < 0.001) return depth;
+        if (d < 0.001*(1.0+thickness)) return depth;
         depth += d;
-        if (depth > 1000.0) break;
+        if (depth > MaxDepth) break;
     }
     return -1.0;
 }
@@ -172,7 +176,7 @@ void main() {
         float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
         
         // Distance from center for color gradient
-        p.xz = p.xz - 3.5*floor(p.xz/3.5+0.5);
+        p.xz = p.xz - field*3.5*floor(p.xz/3.5+0.5);
 
         float distFromCenter = length(p)/2.0;
         distFromCenter = clamp(distFromCenter, 0.0, 1.0);
