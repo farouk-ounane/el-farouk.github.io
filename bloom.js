@@ -141,7 +141,3 @@ function setDepth(val) {
 function setFlowerColor(hexColor) {
   flowerColor = color(hexColor);
 }
-
-function toggleField() {
-    field = 1.0 - field;
-}
