@@ -462,7 +462,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
     repetButton.addEventListener('click', function() {
-        if (window.toggleField) window.toggleField();
         this.textContent = this.textContent.includes('Field') ? 'Single Flower' : 'Field of Flowers';
         field = 1.0 - field;
     });
