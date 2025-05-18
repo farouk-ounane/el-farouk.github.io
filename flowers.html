@@ -394,7 +394,7 @@
 
                 <div class="control-group">
                     <label for="Thickness">Thickness</label>
-                    <input type="range" id="Thickness" min="0" max="20" value="0" class="form-range">
+                    <input type="range" id="Thickness" min="0" max="5" value="0" class="form-range">
                 </div>
 
                 <div class="control-group">
@@ -464,6 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
     repetButton.addEventListener('click', function() {
         if (window.toggleField) window.toggleField();
         this.textContent = this.textContent.includes('Field') ? 'Single Flower' : 'Field of Flowers';
+        field = 1.0 - field;
     });
 
 </script>
