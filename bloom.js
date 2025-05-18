@@ -8,6 +8,10 @@ let dahlia_value;
 let lotus_value;
 let camelia_value;
 
+let thickness;
+let max_depth;
+let field;
+
 let flowerColor;
 
 
@@ -30,12 +34,18 @@ function setup(){
   window.setLotus = setLotus;
   window.setDahlia = setDahlia;
   window.setFlowerColor = setFlowerColor;
+  window.setThickness = setThickness;
+  window.setDepth = setDepth;
 
   flowerColor = color('deeppink');
 
   camelia_value = 500;
   dahlia_value = 500;
   lotus_value = 500;
+
+  thickness = 1.0;
+  max_depth = 300.0;
+  field = 0.0;
 
   shader(raymarcher);
   noStroke();
@@ -80,6 +90,11 @@ function draw() {
   raymarcher.setUniform('hangDown', [hangDownA, hangDownB]);
   raymarcher.setUniform('thetaReduction', thetaReduction);
 
+  raymarcher.setUniform('thickness', thickness);
+  raymarcher.setUniform('MaxDepth', max_depth);
+  raymarcher.setUniform('field', field);
+
+
   rect(0, 0, width, height);
 }
 
@@ -115,6 +130,18 @@ function setDahlia(val) {
     dahlia_value = val;
 }
 
+function setThickness(val) {
+    thickness = val;
+}
+
+function setDepth(val) {
+    max_depth = val;
+}
+
 function setFlowerColor(hexColor) {
   flowerColor = color(hexColor);
+}
+
+function toggleField() {
+    field = 1.0 - field;
 }
