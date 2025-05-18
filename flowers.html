@@ -390,7 +390,7 @@
                     <input type="range" id="Dahlia" min="0" max="500" value="500" class="form-range">
                 </div>
 
-                <button id="Repet" class="control-button">Field of Flowers</button>
+                <button id="repeatButton" class="control-button">Field of Flowers</button>
 
                 <div class="control-group">
                     <label for="Thickness">Thickness</label>
@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const DahliaSlider = document.getElementById('Dahlia');
     const ThicknessSlider = document.getElementById('Thickness');
     const DepthSlider = document.getElementById('Depth');
-    const repetButton = document.getElementById('Repet');
+    const repeatButton = document.getElementById('repeatButton');
 
 
     if (window.setFlowerColor) {
@@ -460,11 +460,11 @@ document.addEventListener('DOMContentLoaded', function() {
             window.setDepth(this.value);
         });
     }
-});
-    repetButton.addEventListener('click', function() {
+        repeatButton.addEventListener('click', function() {
         this.textContent = this.textContent.includes('Field') ? 'Single Flower' : 'Field of Flowers';
         field = 1.0 - field;
     });
+});
 
 </script>
 </body>
