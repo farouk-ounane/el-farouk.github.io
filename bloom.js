@@ -43,7 +43,7 @@ function setup(){
   dahlia_value = 500;
   lotus_value = 500;
 
-  thickness = 1.0;
+  thickness = 0.0;
   max_depth = 300.0;
   field = 0.0;
 
