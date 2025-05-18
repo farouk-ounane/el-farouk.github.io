@@ -97,6 +97,7 @@ float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
     float depth = 0.0;
     for (int i = 0; i < 250; i++) {
         vec3 p = ro + rd * depth;
+        p.xz = p.xz - 3.5*floor(p.xz/3.5+0.5);
         float d = FlowerSDF(p);
        
         if (d < 0.001) return depth;
@@ -171,6 +172,8 @@ void main() {
         float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
         
         // Distance from center for color gradient
+        p.xz = p.xz - 3.5*floor(p.xz/3.5+0.5);
+
         float distFromCenter = length(p)/2.0;
         distFromCenter = clamp(distFromCenter, 0.0, 1.0);
         
