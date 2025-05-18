@@ -87,10 +87,6 @@ float FlowerSDF(vec3 p) {
         return 0.0015;
     }
     
-    if (theta < 0.0) {
-            Cut = 0.0;
-        }
-    
     return max(spiralDist, (R - scale * reduction* Cut)) * 0.01;
 }
 
