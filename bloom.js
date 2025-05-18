@@ -4,9 +4,12 @@ let rotY = 0;
 let prevMouseX, prevMouseY;
 let isDragging = false;
 
-let slider_1;
-let slider_2;
-let slider_3;
+let dahlia_value;
+let lotus_value;
+let camelia_value;
+
+let flowerColor;
+
 
 let myPicker;
 
@@ -23,21 +26,16 @@ function setup(){
   const cnv = createCanvas(16*35, 16*35, WEBGL);
   cnv.parent('sketch');
 
-    // Create a color picker and set its position.
-  myPicker = createColorPicker('deeppink');
-  myPicker.position(100, 30);
+  window.setCamelia = setCamelia;
+  window.setLotus = setLotus;
+  window.setDahlia = setDahlia;
+  window.setFlowerColor = setFlowerColor;
 
-  slider_1 = createSlider(0, 300, 300);
-  slider_1.position(200, 30);
-  slider_1.size(80);
+  flowerColor = color('deeppink');
 
-  slider_2 = createSlider(0, 300, 300);
-  slider_2.position(200, 45);
-  slider_2.size(80);
-
-  slider_3 = createSlider(0, 300, 300);
-  slider_3.position(200, 60);
-  slider_3.size(80);
+  camelia_value = 500;
+  dahlia_value = 500;
+  lotus_value = 500;
 
   shader(raymarcher);
   noStroke();
@@ -45,11 +43,9 @@ function setup(){
 
 function draw() {
 
-  let c = myPicker.color();
-
-  let lambda_1 = float(slider_1.value());
-  let lambda_2 = float(slider_2.value());
-  let lambda_3 = float(slider_3.value());
+  let lambda_1 = float(camelia_value);
+  let lambda_2 = float(lotus_value);
+  let lambda_3 = float(dahlia_value);
 
   let total = lambda_1+lambda_2+lambda_3;
 
@@ -67,9 +63,9 @@ function draw() {
   let hangDownB = lambda_1 * 1.0 + lambda_2 * 0.8 + lambda_3 * 0.9;
   let thetaReduction = (lambda_1 * 6000.0 + lambda_2 * 10000.0 + lambda_3 * 20000.0)*3.14159/180.0;
 
-  let r = red(c) / 255.0;
-  let g = green(c) / 255.0;
-  let b = blue(c) / 255.0;
+  let r = red(flowerColor) / 255.0;
+  let g = green(flowerColor) / 255.0;
+  let b = blue(flowerColor) / 255.0;
 
   raymarcher.setUniform('bColor', [r, g, b]);
 
@@ -108,8 +104,17 @@ function mouseDragged() {
   }
 }
 
-function keyPressed() {
-  if (key === 's') {
-    saveGif('mySketch', 5);
-  }
+function setCamelia(val) {
+    camelia_value = val;
+}
+
+function setLotus(val) {
+    Lotus_value = val;
+}
+function setDahlia(val) {
+    Dahlia_value = val;
+}
+
+function setFlowerColor(hexColor) {
+  flowerColor = color(hexColor);
 }
