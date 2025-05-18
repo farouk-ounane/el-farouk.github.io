@@ -390,6 +390,18 @@
                     <input type="range" id="Dahlia" min="0" max="500" value="500" class="form-range">
                 </div>
 
+                <button id="Repet" class="control-button">Field of Flowers</button>
+
+                <div class="control-group">
+                    <label for="Thickness">Thickness</label>
+                    <input type="range" id="Thickness" min="0" max="20" value="0" class="form-range">
+                </div>
+
+                <div class="control-group">
+                    <label for="Depth">Max Depth</label>
+                    <input type="range" id="Depth" min="100" max="1000" value="100" class="form-range">
+                </div>
+
             </div>
 
             <div class="sketch-description">
@@ -420,6 +432,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const CameliaSlider = document.getElementById('Camelia');
     const LotusSlider = document.getElementById('Lotus');
     const DahliaSlider = document.getElementById('Dahlia');
+    const ThicknessSlider = document.getElementById('Thickness');
+    const DepthSlider = document.getElementById('Depth');
+    const repetButton = document.getElementById('Repet');
+
 
     if (window.setFlowerColor) {
     colorPicker.addEventListener('input', function() {
@@ -436,11 +452,20 @@ document.addEventListener('DOMContentLoaded', function() {
             window.setLotus(this.value);
         });
 
-        DahliaSlider.addEventListener('input', function() {
-            window.setDahlia(this.value);
+        ThicknessSlider.addEventListener('input', function() {
+            window.setThickness(this.value);
+        });
+        
+        DepthSlider.addEventListener('input', function() {
+            window.setDepth(this.value);
         });
     }
 });
+    repetButton.addEventListener('click', function() {
+        if (window.toggleField) window.toggleField();
+        this.textContent = this.textContent.includes('Field') ? 'Single Flower' : 'Field of Flowers';
+    });
+
 </script>
 </body>
 </html>
