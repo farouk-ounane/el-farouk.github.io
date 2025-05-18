@@ -86,8 +86,8 @@ float FlowerSDF(vec3 p) {
     float reduction = exp(-5.*theta/thetaReduction);
     
 
-    if (spiralDist < 0.1 && theta < 0.0) {
-        return 0.0015;
+    if (theta < 0.0) {
+        Cut = 0.0;
     }
     
     return max(spiralDist, (R - scale * reduction* Cut)) * 0.01;
@@ -95,14 +95,14 @@ float FlowerSDF(vec3 p) {
 
 float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
     float depth = 0.0;
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 1000; i++) {
         vec3 p = ro + rd * depth;
         p.xz = p.xz - 3.5*floor(p.xz/3.5+0.5);
         float d = FlowerSDF(p);
        
         if (d < 0.001) return depth;
         depth += d;
-        if (depth > 500.0) break;
+        if (depth > 1000.0) break;
     }
     return -1.0;
 }
