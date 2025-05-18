@@ -99,7 +99,7 @@ float FlowerSDF(vec3 p) {
 
 float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
     float depth = 0.0;
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < max(250, MaxDepth); i++) {
         vec3 p = ro + rd * depth;
         p.xz = p.xz - field*3.5*floor(p.xz/3.5+0.5);
         float d = FlowerSDF(p);
