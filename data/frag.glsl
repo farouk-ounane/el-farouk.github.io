@@ -1,6 +1,6 @@
 #ifdef GL_ES
-precision mediump float;
-precision mediump int;
+precision highp float;
+precision highp int;
 #endif
 
 uniform vec2 iResolution;
@@ -199,10 +199,6 @@ void main() {
         // Glow effect based on distance from center
         float glow = smoothstep(0.7, 1.0, distFromCenter) * 0.5;
         color +=  bColor * glow;
-        
-        // Add rim lighting for extra glow
-        float rim = pow(1.0 - clamp(dot(normal, viewDir), 0.0, 1.0), 3.0);
-        color += vec3(1.0, 0.7, 0.5) * rim * 0.5;
         
         gl_FragColor = vec4(color, 1.0);
     } else {
