@@ -67,6 +67,9 @@ float FlowerSDF(vec3 p) {
     p = p - vec3(0.0, C * length(p.xz), 0.0);
     
     R = length(p);
+
+    if (R > scale + 1.0 ) return R - scale+ - 1.0 + 0.00105;
+
     
     float phi = acos(-p.y / R);
     float theta = -param.y * 2.302585 * (phi - param.x) /( phi + param.x);
@@ -87,12 +90,12 @@ float FlowerSDF(vec3 p) {
         return 0.0015;
     }
     
-    return max(spiralDist, (R - scale * reduction* Cut)) * 0.01;
+    return 2.0*max(spiralDist, (R - scale * reduction* Cut)) * 0.01;
 }
 
 float rayMarch(vec3 ro, vec3 rd, vec3 normal) {
     float depth = 0.0;
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 250; i++) {
         vec3 p = ro + rd * depth;
         float d = FlowerSDF(p);
        
