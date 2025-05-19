@@ -295,6 +295,11 @@
                 aspect-ratio: 1/1;
             }
 
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+
             .sketch-controls {
                 order: 2;
                 flex: 1 1 100%;
@@ -450,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ThicknessSlider.addEventListener('input', function() {
             window.setThickness(this.value);
         });
-        
+
     }
     });
 
