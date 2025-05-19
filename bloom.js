@@ -98,9 +98,11 @@ function draw() {
 }
 
 function mousePressed() {
-  isDragging = true;
-  prevMouseX = mouseX;
-  prevMouseY = mouseY;
+  if(mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+    isDragging = true;
+    prevMouseX = mouseX;
+    prevMouseY = mouseY;
+  }
 }
 
 function mouseReleased() {
