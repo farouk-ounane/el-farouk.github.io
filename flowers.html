@@ -426,8 +426,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const LotusSlider = document.getElementById('Lotus');
     const DahliaSlider = document.getElementById('Dahlia');
     const ThicknessSlider = document.getElementById('Thickness');
-    const DepthSlider = document.getElementById('Depth');
-    const repeatButton = document.getElementById('repeatButton');
 
 
     if (window.setFlowerColor) {
@@ -453,12 +451,8 @@ document.addEventListener('DOMContentLoaded', function() {
             window.setThickness(this.value);
         });
         
-        DepthSlider.addEventListener('input', function() {
-            window.setDepth(this.value);
-        });
     }
     });
-});
 
 </script>
 </body>
