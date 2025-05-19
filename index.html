@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <!-- Chart.js for radar charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+    html {
+    scroll-behavior: smooth;
+}
         /* Custom CSS */
         :root {
             --dark-bg: #1a1a1a;
@@ -29,11 +33,11 @@
             max-width: 100vw;
         }
 
-
         .portfolio-link {
-          display: block;
-          text-decoration: none;
-       }
+            display: block;
+            text-decoration: none;
+        }
+
         /* Sidebar styling */
         .sidebar {
             position: fixed;
@@ -130,22 +134,25 @@
             padding-bottom: 10px;
         }
 
-        /* Skill bars */
-        .skill-bar {
-            height: 25px;
-            background-color: #f1f1f1;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            overflow: hidden;
+        /* Radar chart styling */
+        .skill-chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
 
-        .skill-progress {
-            height: 100%;
-            background-color: var(--dark-bg);
-            color: white;
+        .skill-chart {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .chart-title {
             text-align: center;
-            line-height: 25px;
-            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark-bg);
         }
 
         /* Image hover effects */
@@ -234,25 +241,17 @@
                 border-radius: 0;
             }
 
-            #modal-content-container canvas {
-                transform: scale(0.6);
+
+        }
+
+        @media (max-width: 768px) {
+            #modal-content-container {
+                overflow: auto;
+                max-height: 60vh;
             }
-        }
 
-    @media (max-width: 768px) {
-        #modal-content-container {
-            overflow: auto;
-            max-height: 60vh;
-        }
 
-        #modal-content-container canvas {
-            max-width: 100%;
-            height: auto !important;
-            transform-origin: top left;
-            transform: scale(0.7);
         }
-    }
-
     </style>
 </head>
 <body>
@@ -321,32 +320,20 @@
     <section id="about" class="mb-5 p-4 bg-light rounded">
         <h4 class="section-heading">ABOUT ME</h4>
         <div class="container">
-            <p>I am a mathematician and algorithm developer with a strong background in dynamical systems, partial differential equations, and numerical methods. My expertise lies in designing and implementing efficient algorithms for solving complex mathematical problems.</p>
-            <p>I have strong experience in numerical methods, computational geometry, and computer graphics. Skilled in bridging mathematical theory with practical implementations, simulations, and creative coding. I am passionate about tackling challenging problems, optimizing algorithms, and delivering innovative solutions in a collaborative environment.</p>
-
+            <p>I am a mathematician and creative coder with a strong background in differential geometry, partial differential equations, numerical methods, computational geometry and computer graphics. </p>
+            <p> Skilled in bridging mathematical theory with practical implementations, simulations, and creative coding. I am passionate about tackling challenging problems, optimizing algorithms, and delivering innovative solutions in a collaborative environment.</p>
+            <p> We are now in 2025, I have almost completed my Ph.D in Mathematics and I am looking for new opportunities. </p>
             <h5 class="mt-4 mb-3">Technical Skills</h5>
-            <div class="mb-3">
-                <p>Mathematical Modeling</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 95%">95%</div>
+            <div class="skill-chart-container">
+                <!-- Programming Skills Radar Chart -->
+                <div class="skill-chart">
+                    <div class="chart-title">Programming</div>
+                    <canvas id="programmingChart"></canvas>
                 </div>
-            </div>
-            <div class="mb-3">
-                <p>Algorithm Development</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 90%">90%</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <p>Numerical Analysis</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 85%">85%</div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <p>Programming (C++, Python, MATLAB)</p>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="width: 80%">80%</div>
+                <!-- Mathematics Skills Radar Chart -->
+                <div class="skill-chart">
+                    <div class="chart-title">Mathematics</div>
+                    <canvas id="mathChart"></canvas>
                 </div>
             </div>
 
@@ -375,24 +362,109 @@
         </div>
     </section>
 
-
     <footer class="mt-5">
         <p>Mohamed El Farouk Ounane &copy; 2024 | Powered by Bootstrap</p>
     </footer>
 </div>
 
-
 <!-- Bootstrap JS Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    // Initialize radar charts after the DOM loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Common chart options
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true,
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    ticks: {
+                        stepSize: 20,
+                        backdropColor: 'transparent',
+                        font: {
+                            weight: 'bold'
+                        }
+                    },
+                    pointLabels: {
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        };
 
-// Toggle sidebar on small screens
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('active');
-}
+        // Programming Skills Chart
+        const programmingCtx = document.getElementById('programmingChart').getContext('2d');
+        const programmingChart = new Chart(programmingCtx, {
+            type: 'radar',
+            data: {
+                labels: ['C/C++', 'Python', 'JavaScript', 'GLSL', 'MATLAB'],
+                datasets: [{
+                    label: 'Skill Level',
+                    data: [85, 85, 65, 80, 60],
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    pointBackgroundColor: 'rgba(255, 159, 64, 1)',
+                    pointRadius: 4,
+                    borderWidth: 2
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Mathematics Skills Chart
+        const mathCtx = document.getElementById('mathChart').getContext('2d');
+        const mathChart = new Chart(mathCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Symplectic Geometry', 'Riemannian Geometry', 'PDEs', 'Numerical Methods', 'Other'],
+                datasets: [{
+                    label: 'Skill Level',
+                    data: [70, 70, 80, 80, 60],
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    pointBackgroundColor: 'rgba(255, 159, 64, 1)',
+                    pointRadius: 4,
+                    borderWidth: 2
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Force both charts to have the same size
+        function resizeCharts() {
+            const charts = [programmingChart, mathChart];
+            const maxWidth = Math.max(
+                ...charts.map(chart => chart.width)
+            );
+            const maxHeight = Math.max(
+                ...charts.map(chart => chart.height)
+            );
+
+            charts.forEach(chart => {
+                chart.canvas.style.width = maxWidth + 'px';
+                chart.canvas.style.height = maxHeight + 'px';
+                chart.resize();
+            });
+        }
+
+        // Initial resize
+        setTimeout(resizeCharts, 100);
+
+        // Resize on window resize
+        window.addEventListener('resize', resizeCharts);
+    });
 </script>
-
 </body>
 </html>
