@@ -35,7 +35,6 @@ function setup(){
   window.setDahlia = setDahlia;
   window.setFlowerColor = setFlowerColor;
   window.setThickness = setThickness;
-  window.setDepth = setDepth;
 
   flowerColor = color('deeppink');
 
@@ -134,9 +133,6 @@ function setThickness(val) {
     thickness = val;
 }
 
-function setDepth(val) {
-    max_depth = val;
-}
 
 function setFlowerColor(hexColor) {
   flowerColor = color(hexColor);
