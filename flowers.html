@@ -390,16 +390,9 @@
                     <input type="range" id="Dahlia" min="0" max="500" value="500" class="form-range">
                 </div>
 
-                <button id="repeatButton" class="control-button">Field of Flowers</button>
-
                 <div class="control-group">
                     <label for="Thickness">Thickness</label>
                     <input type="range" id="Thickness" min="0" max="5" value="0" class="form-range">
-                </div>
-
-                <div class="control-group">
-                    <label for="Depth">Max Depth</label>
-                    <input type="range" id="Depth" min="100" max="1000" value="100" class="form-range">
                 </div>
 
             </div>
@@ -464,9 +457,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.setDepth(this.value);
         });
     }
-        repeatButton.addEventListener('click', function() {
-        this.textContent = this.textContent.includes('Field') ? 'Single Flower' : 'Field of Flowers';
-        field = 1.0 - field;
     });
 });
 
