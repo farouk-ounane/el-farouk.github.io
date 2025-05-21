@@ -34,8 +34,7 @@ function setup(){
   window.setLotus = setLotus;
   window.setDahlia = setDahlia;
   window.setFlowerColor = setFlowerColor;
-  window.setThickness = setThickness;
-
+  
   flowerColor = color('deeppink');
 
   camelia_value = 500;
@@ -129,10 +128,6 @@ function setLotus(val) {
 }
 function setDahlia(val) {
     dahlia_value = val;
-}
-
-function setThickness(val) {
-    thickness = val;
 }
 
 
