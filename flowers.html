@@ -395,11 +395,6 @@
                     <input type="range" id="Dahlia" min="0" max="500" value="500" class="form-range">
                 </div>
 
-                <div class="control-group">
-                    <label for="Thickness">Thickness</label>
-                    <input type="range" id="Thickness" min="0" max="5" value="0" class="form-range">
-                </div>
-
             </div>
 
             <div class="sketch-description">
@@ -430,8 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const CameliaSlider = document.getElementById('Camelia');
     const LotusSlider = document.getElementById('Lotus');
     const DahliaSlider = document.getElementById('Dahlia');
-    const ThicknessSlider = document.getElementById('Thickness');
-
 
     if (window.setFlowerColor) {
     colorPicker.addEventListener('input', function() {
@@ -452,9 +445,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.setDahlia(this.value);
         });
 
-        ThicknessSlider.addEventListener('input', function() {
-            window.setThickness(this.value);
-        });
 
     }
     });
